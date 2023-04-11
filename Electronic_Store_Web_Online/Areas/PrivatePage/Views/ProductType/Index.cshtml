@@ -1,0 +1,124 @@
+﻿@using Electronic_Store_Web_Online.Models;
+@{
+    ViewBag.Title = "Index";
+    List<SanPham> listSP = ViewData["DanhSachSP"] as List<SanPham>;
+}
+<style>
+    form {
+        display: inline;
+    }
+</style>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Danh sách các sản phẩm trong hệ thống</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","DashBoard")">Home</a></li>
+                        <li class="breadcrumb-item active">Danh sách sản phẩm </li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Danh sách sản phẩm</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Giá bán</th>
+                                        <th>Giảm giá</th>
+                                        <th>Nhà sản xuất</th>
+                                        <th>Ngày đăng</th>
+                                        <th>Tài khoản</th>
+                                        <th>Lệnh - Công cụ</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                <tbody>
+                                    @{
+                                        foreach (SanPham i in listSP)
+                                        {
+                                            <tr>
+                                                <td>@i.tenSP</td>
+                                                <td>@i.giaBan</td>
+                                                <td>@i.giamGia</td>
+                                                <td>@i.nhaSanXuat</td>
+                                                <td>@string.Format("{0:hh:mm [dd/MM/yyyy]}", i.ngayDang)</td>
+                                                @*---TaiKhoan1: Đối tượng tài khoản hay đăng bài *@
+                                                <td>@i.TaiKhoan1.hoDem @i.TaiKhoan1.tenTV </td>
+                                                <td>
+                                                    <div class="text-center ">
+                                                        @using (Html.BeginForm("Active", "ProductType", FormMethod.Post))
+                                                        {
+                                                            <input type="hidden" name="maSanPham" value="@i.maSP" />
+                                                            <button class="btn-success" title="@ViewBag.TdTile ">
+                                                                @ViewBag.TDungCuaNut
+                                                            </button>
+                                                        }
+                                                        @using (Html.BeginForm("Update", "ProductType", FormMethod.Post))
+                                                        {
+                                                            <input type="hidden" name="maLoaiChinhSua" value=" @i.maLoai" />
+                                                            <button class="btn-info" title="Chỉnh sửa loại hàng">
+                                                               <i class="fa fa-wrench" aria-hidden="true"></i>
+                                                            </button>
+                                                        }
+
+                                                        @using (Html.BeginForm("Delete", "ProductType", FormMethod.Post))
+                                                        {
+                                                            <input type="hidden" name="maSanPham" value="@i.maSP" />
+                                                            <button class="btn-danger" title="Xóa bài viết">
+                                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                            </button>
+                                                        }
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        }
+                                    }
+                                </tbody>
+
+
+                                <tfoot>
+                                    <tr>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Giá bán</th>
+                                        <th>Giảm giá</th>
+                                        <th>Nhà sản xuất</th>
+                                        <th>Ngày đăng</th>
+                                        <th>Tài khoản</th>
+                                        <th>Lệnh - Công cụ</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

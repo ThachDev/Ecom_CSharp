@@ -1,0 +1,293 @@
+﻿@using Electronic_Store_Web_Online.Models
+@{
+    ViewBag.Title = "Index";
+    //Lấy đối tượng vừa khởi tạo từ Db (SingleController) sang View
+    // "SPChiTietCanXem" là 1 đối tượng nên phải chuyển thành SanPham.
+    SanPham i = ViewData["SPChiTietCanXem"] as SanPham;
+}
+<style>
+    .giamgia {
+        margin-left: 16px;
+        background: #f43e08;
+        color: white;
+    }
+</style>
+<!-- banner -->
+<div class="banner banner2">
+    <div class="container">
+        <h2 style=" color: #fff; font-size: 3em; text-align: center; padding: 1.5em 0 0;">Chi tiết sản phẩm</h2>
+    </div>
+</div>
+<!-- //banner -->
+<!-- breadcrumbs -->
+<div class="breadcrumb_dress" style=" height: 50px;background: #c2c2c2;">
+    <div class="container" style=" margin-top: 8px;">
+        <ul>
+            <li><a href='@Url.Action("Index", "Index")'><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a> <i>/</i></li>
+            <li>Chi tiết sản phẩm</li>
+        </ul>
+    </div>
+</div>
+<!-- //breadcrumbs -->
+<!-- single -->
+<div class="single">
+    <div class="container">
+        <div class="col-md-4 single-left">
+            <div class="flexslider">
+                <ul class="slides">
+                    <li>
+                        <div> <img src="@i.hinhDD" data-imagezoom="true" class="img-responsive" alt=""> </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- flexslider -->
+            <script defer src="~/Scripts/jquery.flexslider.js"></script>
+            <link rel="stylesheet" href="~/Content/flexslider.css" type="text/css" media="screen" />
+            <script>
+                // Can also be used with $(document).ready()
+                $(window).load(function () {
+                    $('.flexslider').flexslider({
+                        animation: "slide",
+                        controlNav: "thumbnails"
+                    });
+                });
+            </script>
+            <!-- flexslider -->
+            <!-- zooming-effect -->
+            <script src="~/Scripts/imagezoom.js"></script>
+            <!-- //zooming-effect -->
+        </div>
+        <div class="col-md-8 single-right">
+            <h3><i style=" background: #ff6300; color: white;">Yêu thích</i> @i.tenSP</h3>
+            <div class="rating1">
+                <span class="starRating">
+                    <input id="rating5" type="radio" name="rating" value="5">
+                    <label for="rating5">5</label>
+                    <input id="rating4" type="radio" name="rating" value="4">
+                    <label for="rating4">4</label>
+                    <input id="rating3" type="radio" name="rating" value="3" checked>
+                    <label for="rating3">3</label>
+                    <input id="rating2" type="radio" name="rating" value="2">
+                    <label for="rating2">2</label>
+                    <input id="rating1" type="radio" name="rating" value="1">
+                    <label for="rating1">1</label>
+                </span>
+            </div>
+            <div class="description">
+                <h5 class="text-center" style="color: #000000; font-size: 2em;"><i>Mô tả sản phẩm</i></h5>
+                <p class="font-weight-bold" style=" color: #000; line-height: 1.8em; margin: 1em 0 0; font-size: 16px;">
+                    @i.ndTomTat
+                </p>
+            </div>
+            <div class="simpleCart_shelfItem">
+                <p><span>@String.Format("{0:#,##0 Đồng}", i.giaBan)</span> <i class="item_price">@String.Format("{0:#,##0 Đồng}", (@i.giaBan - (@i.giaBan * @i.giamGia / 100))) </i><i class="giamgia">@i.giamGia% GIẢM</i></p>
+                @using (Html.BeginForm("AddToCart", "Home", FormMethod.Post))
+                {
+                    <input name="maSP" type="hidden" value=" @i.maSP" />
+                    <button type="submit" class="w3ls-cart" style=" height: 50px; border: 1px solid #983232; ">Add to cart</button>
+                }
+            </div>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+<div class="additional_info" style=" padding: 2em 0;">
+    <div class="container">
+        <div class="sap_tabs">
+            <div id="horizontalTab1" style="display: block; width: 100%; margin: 0px;">
+                <ul>
+                    <li class="resp-tab-item" aria-controls="tab_item-0" role="tab" style=" background: #eb620f;"><span>Mô tả chi tiết sản phẩm</span></li>
+                    <li class="resp-tab-item" aria-controls="tab_item-1" role="tab" style=" background: #eb620f;"><span>Reviews</span></li>
+                </ul>
+                <div class="tab-1 resp-tab-content " aria-labelledby="tab_item-0">
+                    <h3>@i.tenSP</h3>
+                    <div style=" margin: 0; color: #000; line-height: 1.8em;">
+                        <p>
+                            @Html.Raw(i.noiDung)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="tab-2 resp-tab-content additional_info_grid" aria-labelledby="tab_item-1">
+                    <h4>(2) Reviews</h4>
+                    <div class="additional_info_sub_grids">
+                        <div class="col-xs-2 additional_info_sub_grid_left">
+                            <img src="~/images/t1.png" alt=" " class="img-responsive" />
+                        </div>
+                        <div class="col-xs-10 additional_info_sub_grid_right">
+                            <div class="additional_info_sub_grid_rightl">
+                                <a href="#">Laura</a>
+                                <h5>@i.tenSP</h5>
+                                <p>
+                                    Sản phẩm đẹp, sử dụng rất bền, sẽ giới thiệu cho người nhà để mua. Shop bán hàng chất lượng đấy !!!
+                                </p>
+                            </div>
+                            <div class="additional_info_sub_grid_rightr">
+                                <div class="rating">
+                                    <div class="rating-left">
+                                        <img src="~/images/star-.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="~/images/star-.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="~/images/star-.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="~/images/star.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="~/images/star.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="additional_info_sub_grids">
+                        <div class="col-xs-2 additional_info_sub_grid_left">
+                            <img src="~/images/t2.png" alt=" " class="img-responsive" />
+                        </div>
+                        <div class="col-xs-10 additional_info_sub_grid_right">
+                            <div class="additional_info_sub_grid_rightl">
+                                <a href="#">Michael</a>
+                                <h5>@i.tenSP</h5>
+                                <p>
+                                    Sản phẩm tốt, uy tín và chất lượng. Hi vọng shop sẽ ra nhiều sản phẩm chất lượng hơn nữa
+                                    để người dùng có thể thỏa thích mua sản phẩm mà không sợ lừa đảo.
+                                </p>
+                            </div>
+                            <div class="additional_info_sub_grid_rightr">
+                                <div class="rating">
+                                    <div class="rating-left">
+                                        <img src="~/images/star-.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="~/images/star-.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="~/images/star.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="~/images/star.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="rating-left">
+                                        <img src="~/images/star.png" alt=" " class="img-responsive">
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="review_grids">
+                        <h5>Bình luận</h5>
+                        <form action="#" method="post">
+                            <input type="text" name="Name" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">
+                            <input type="email" name="Email" placeholder="Email" required="">
+                            <input type="text" name="Telephone" value="Telephone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Telephone';}" required="">
+                            <textarea name="Review" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Add Your Review';}" required="">Add Your Review</textarea>
+                            <input type="submit" value="Submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="~/Scripts/easyResponsiveTabs.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#horizontalTab1').easyResponsiveTabs({
+                    type: 'default', //Types: default, vertical, accordion
+                    width: 'auto', //auto or any width like 600px
+                    fit: true   // 100% fit in a container
+                });
+            });
+        </script>
+    </div>
+</div>
+<!-- //single -->
+<div class="w3l_related_products">
+    <div class="container">
+        <h3>Sản phẩm mới</h3>
+        <ul id="flexiselDemo2">
+            @{ //Khởi tạo biến e để tạo ra sản phẩm cần minh họa
+
+                foreach (SanPham k in Common.getNewSanPham(6))
+                {
+                    <li>
+                        <div class="w3l_related_products_grid">
+                            <div class="agile_ecommerce_tab_left mobiles_grid">
+                                <div>
+                                    <img src="@k.hinhDD" alt="@k.maLoai " class="img-responsive" />
+
+
+                                </div>
+                                <h5 style="width:280px"><a href="@Url.Action("Index","Single",new {MaSanPham = k.maSP})">@k.tenSP</a></h5>
+                                <div class="simpleCart_shelfItem">
+                                    <p class="flexisel_ecommerce_cart"><span>@String.Format("{0:#,##0 Đồng}", k.giaBan)</span> <i class="item_price">@String.Format("{0:#,##0 Đồng}", (@k.giaBan - (@k.giaBan * @k.giamGia / 100)))</i></p>
+                                    @using (Html.BeginForm("AddToCart", "Home", FormMethod.Post))
+                                    {
+                                        <input name="maSP" type="hidden" value=" @k.maSP" />
+                                        <button type="submit" class="w3ls-cart" style=" height: 50px; border: 1px solid #983232; ">Add to cart</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                }
+            }
+
+
+        </ul>
+
+        <script type="text/javascript">
+            $(window).load(function () {
+                $("#flexiselDemo2").flexisel({
+                    visibleItems: 4,
+                    animationSpeed: 1000,
+                    autoPlay: true,
+                    autoPlaySpeed: 3000,
+                    pauseOnHover: true,
+                    enableResponsiveBreakpoints: true,
+                    responsiveBreakpoints: {
+                        portrait: {
+                            changePoint: 480,
+                            visibleItems: 1
+                        },
+                        landscape: {
+                            changePoint: 640,
+                            visibleItems: 2
+                        },
+                        tablet: {
+                            changePoint: 768,
+                            visibleItems: 3
+                        }
+                    }
+                });
+
+            });
+        </script>
+        <script type="text/javascript" src="~/Scripts/jquery.flexisel.js"></script>
+    </div>
+</div>
+<!-- newsletter -->
+<div class="newsletter">
+    <div class="container">
+        <div class="col-md-6 w3agile_newsletter_left">
+            <h3>Newsletter</h3>
+            <p>Excepteur sint occaecat cupidatat non proident, sunt.</p>
+        </div>
+        <div class="col-md-6 w3agile_newsletter_right">
+            <form action="#" method="post">
+                <input type="email" name="Email" placeholder="Email" required="">
+                <input type="submit" value="" />
+            </form>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!-- //newsletter -->

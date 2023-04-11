@@ -1,0 +1,320 @@
+﻿@using Electronic_Store_Web_Online.Models
+@{
+    ViewBag.Title = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- banner -->
+<div class="banner" style=" background: url(../images/b1.jpg) no-repeat center 0px; -webkit-background-size: cover;">
+    <div class="container">
+        <h3>Electronic Store, <span>Special Offers</span></h3>
+    </div>
+</div>
+<!-- //banner -->
+<!-- banner-bottom -->
+<div class="banner-bottom">
+    <div class="container">
+        <div class="special-deals" style="padding:2em 0">
+            <h2>Gợi ý hôm nay</h2>
+        </div>
+        <div class=" wthree_banner_bottom_right">
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+
+                <ul id="myTab" class="nav nav-tabs" role="tablist" style="width: 108%; background: antiquewhite;  font-size: 1.0em; color: #000001; font-family: 'Roboto' ">
+                    @{
+                        //Đặt điều kiện để hình thành active
+                        int d = 0;
+                        // Foreach(<kieuDL> bien in <tapHop>)
+                        foreach (LoaiSP i in Common.getCateogories())
+                        {
+                            // gắn @i.maLoai vào các id để có thể liên kết với nhau.
+                            <li role="presentation" style="margin-bottom: 15px;">
+                                <a href="#@i.maLoai" class=" nav-link @(d++ != 0 ? "active" : "")" id="@i.maLoai-tab" role="tab" data-toggle="tab" aria-controls="@i.maLoai">@i.tenLoai</a>
+                            </li>
+                        }
+
+                    }
+                </ul>
+
+
+                @*Sản phẩm*@
+                @{
+                    <div id="myTabContent" class="tab-content">
+                        @{
+                            //Khởi tạo 1 biến n để trùng với active bên trên line 49.
+                            int m = 0;
+                            //Tạo 1 foreach để khởi chạy các mã loại sản phẩm.
+                            foreach (LoaiSP i in Common.getCateogories())
+                            {
+                                <div role="tabpanel" class="tab-pane fade @(m++ == 0 ? "active" : "") in" id="@i.maLoai" aria-labelledby="@i.maLoai-tab">
+                                    <div class="agile_ecommerce_tabs ">
+                                        @{ //Khởi tạo biến n để tạo ra sản phẩm cần minh họa
+                                            int n = 1;
+
+                                            foreach (SanPham j in Common.getProductSP(i.maLoai))
+
+                                            {
+
+                                                <div class="col-md-4 agile_ecommerce_tab_left" style="margin-bottom:30px; height: 424px; margin-top: 30px">
+                                                    <div>
+                                                        <a href="@Url.Action("Index", "Single", new { MaSanPham = j.maSP }) ">
+                                                            <img src="@j.hinhDD " id="@j.maLoai" style="height: 240px; border-radius: 10px; " />
+                                                        </a>
+                                                    </div>
+                                                    <h5><a href="@Url.Action("Index", "Single", new { MaSanPham = j.maSP })">@j.tenSP</a></h5>
+                                                    <div class="simpleCart_shelfItem" style="margin-top:25px; margin-bottom: 30px;">
+                                                        <p>
+                                                            <span>@String.Format("{0:#,##0 Đồng}", j.giaBan)</span>
+                                                            <i class="item_price">
+                                                                @String.Format("{0:#,##0 Đồng}", (@j.giaBan - (@j.giaBan * @j.giamGia / 100)))
+                                                            </i>
+                                                        </p>
+                                                        @using (Html.BeginForm("AddToCart", "Home", FormMethod.Post))
+                                                        {
+                                                            <input name="maSP" type="hidden" value=" @j.maSP" />
+                                                            <button type="submit" class="w3ls-cart" style=" height: 50px; border: 1px solid #983232; "><b>Thêm giỏ hàng</b></button>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+                                            if (n++ >= 9)
+                                            {
+                                                break;
+                                            }
+                                        }
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!-- //banner-bottom -->
+<!-- banner-bottom1 -->
+<div class="banner-bottom1">
+    <div class="agileinfo_banner_bottom1_grids">
+        <div class="col-md-7 agileinfo_banner_bottom1_grid_left">
+            <h3>Các sản phẩm duy nhất ngày hôm nay <span>20% <i>Discount</i></span></h3>
+            <a href="@Url.Action("Index", "Index")">Shop Now</a>
+        </div>
+        <div class="col-md-5 agileinfo_banner_bottom1_grid_right">
+            <h4>hot deal</h4>
+            <div class="timer_wrap">
+                <div id="counter"> </div>
+                <script src="~/Scripts/jquery.countdown.js"></script>
+                <script src="~/Scripts/script.js"></script>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+
+<!-- //banner-bottom1 -->
+<!-- special-deals -->
+<div class="special-deals">
+    <div class="container">
+        <h2>Ưu đãi đặc biệt</h2>
+        <div class="w3agile_special_deals_grids">
+            <div class="col-md-7 w3agile_special_deals_grid_left">
+                <div class="w3agile_special_deals_grid_left_grid">
+                    <img src="~/images/21.jpg" alt=" " class="img-responsive" />
+                    <div class="w3agile_special_deals_grid_left_grid_pos1">
+                        <h5>30%<span>Off/-</span></h5>
+                    </div>
+                    <div class="w3agile_special_deals_grid_left_grid_pos">
+                        <h4>Chúng tôi <span>Cung cấp sản phẩm tốt nhất</span></h4>
+                    </div>
+                </div>
+                <div class="wmuSlider example1">
+                    <div class="wmuSliderWrapper">
+                        <article style="position: absolute; width: 100%; opacity: 0;">
+                            <div class="banner-wrap">
+                                <div class="w3agile_special_deals_grid_left_grid1">
+                                    <img src="~/images/t1.png" alt=" " class="img-responsive" />
+                                    <p>
+                                        Phẩm chất ở trong lòng, thương hiệu nổi tiếng ở trong tay, trách nhiệm ở trên vai,
+                                        và sự chính trực nằm trong lời nói và việc làm.
+                                    </p>
+                                    <h4>Laura</h4>
+                                </div>
+                            </div>
+                        </article>
+                        <article style="position: absolute; width: 100%; opacity: 0;">
+                            <div class="banner-wrap">
+                                <div class="w3agile_special_deals_grid_left_grid1">
+                                    <img src="~/images/t2.png" alt=" " class="img-responsive" />
+                                    <p>
+                                        Phải mất một quá trình lâu dài để chuyển từ thay đổi định lượng
+                                        sang thay đổi về chất, và chỉ cần một bước nhỏ là chuyển thay
+                                        đổi về chất thành thay đổi về lượng.
+                                    </p>
+                                    <h4>Michael</h4>
+                                </div>
+                            </div>
+                        </article>
+                        <article style="position: absolute; width: 100%; opacity: 0;">
+                            <div class="banner-wrap">
+                                <div class="w3agile_special_deals_grid_left_grid1">
+                                    <img src="~/images/t3.png" alt=" " class="img-responsive" />
+                                    <p>
+                                        Tạo sản phẩm bằng cảm xúc chân thật và xây dựng chất lượng bằng tình yêu thương.
+                                    </p>
+                                    <h4>Rosy</h4>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <script src="~/Scripts/jquery.wmuSlider.js"></script>
+                <script>
+                    $('.example1').wmuSlider();
+                </script>
+            </div>
+            <div class="col-md-5 w3agile_special_deals_grid_right">
+                <img src="~/images/20.jpg" alt=" " class="img-responsive" />
+                <div class="w3agile_special_deals_grid_right_pos">
+                    <h4>Đặc biệt <span>Nữ</span></h4>
+                    <h5>Tiết kiệm <span>tới</span> 30%</h5>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!-- //special-deals -->
+<!-- new-products -->
+<div class="w3l_related_products">
+    <div class="container">
+        <h3>Sản phẩm mới</h3>
+        <ul id="flexiselDemo2">
+            @{ //Khởi tạo biến e để tạo ra sản phẩm cần minh họa
+                foreach (SanPham k in Common.getNewSanPham(6))
+                {
+                    <li>
+                        <div class="w3l_related_products_grid">
+                            <div class="agile_ecommerce_tab_left mobiles_grid">
+                                <div>
+                                    <img src="@k.hinhDD" alt="@k.maLoai " class="img-responsive" />
+                                </div>
+                                <h5 style="width:280px"><a href="@Url.Action("Index","Single",new {MaSanPham = k.maSP})">@k.tenSP</a></h5>
+                                <div class="simpleCart_shelfItem">
+                                    <p class="flexisel_ecommerce_cart"><span>@String.Format("{0:#,##0 Đồng}", k.giaBan)</span> <i class="item_price">@String.Format("{0:#,##0 Đồng}", (@k.giaBan - (@k.giaBan * @k.giamGia / 100)))</i></p>
+                                    @using (Html.BeginForm("AddToCart", "Home", FormMethod.Post))
+                                    {
+                                        <input name="maSP" type="hidden" value=" @k.maSP" />
+                                        <button type="submit" class="w3ls-cart" style=" height: 50px; border: 1px solid #983232; ">Add to cart</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                }
+            }
+        </ul>
+
+        <script type="text/javascript">
+            $(window).load(function () {
+                $("#flexiselDemo2").flexisel({
+                    visibleItems: 4,
+                    animationSpeed: 1000,
+                    autoPlay: true,
+                    autoPlaySpeed: 3000,
+                    pauseOnHover: true,
+                    enableResponsiveBreakpoints: true,
+                    responsiveBreakpoints: {
+                        portrait: {
+                            changePoint: 480,
+                            visibleItems: 1
+                        },
+                        landscape: {
+                            changePoint: 640,
+                            visibleItems: 2
+                        },
+                        tablet: {
+                            changePoint: 768,
+                            visibleItems: 3
+                        }
+                    }
+                });
+
+            });
+        </script>
+        <script type="text/javascript" src="~/Scripts/jquery.flexisel.js"></script>
+    </div>
+</div>
+<!-- //new-products -->
+<!-- top-brands -->
+<div class="top-brands">
+    <div class="container">
+        <h3>Top Brands</h3>
+        <div class="sliderfig">
+            <ul id="flexiselDemo1">
+                <li>
+                    <img src="~/images/logoSamSung.jpg" alt=" " class="img-responsive" />
+                </li>
+                <li>
+                    <img src="~/images/LogoCanon.png" alt=" " class="img-responsive" />
+                </li>
+                <li>
+                    <img src="~/images/LogoCisco.png" alt=" " class="img-responsive" />
+                </li>
+                <li>
+                    <img src="~/images/LogoHP.png" alt=" " class="img-responsive" />
+                </li>
+                <li>
+                    <img src="~/images/LogoPanasonic.png" alt=" " class="img-responsive" />
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript">
+            $(window).load(function () {
+                $("#flexiselDemo1").flexisel({
+                    visibleItems: 4,
+                    animationSpeed: 1000,
+                    autoPlay: true,
+                    autoPlaySpeed: 3000,
+                    pauseOnHover: true,
+                    enableResponsiveBreakpoints: true,
+                    responsiveBreakpoints: {
+                        portrait: {
+                            changePoint: 480,
+                            visibleItems: 1
+                        },
+                        landscape: {
+                            changePoint: 640,
+                            visibleItems: 2
+                        },
+                        tablet: {
+                            changePoint: 768,
+                            visibleItems: 3
+                        }
+                    }
+                });
+
+            });
+        </script>
+        <script type="text/javascript" src="~/Scripts/jquery.flexisel.js"></script>
+    </div>
+</div>
+<!-- //top-brands -->
+<!-- newsletter -->
+<div class="newsletter">
+    <div class="container">
+        <div class="col-md-6 w3agile_newsletter_left">
+            <h3>Newsletter</h3>
+            <p>Excepteur sint occaecat cupidatat non proident, sunt.</p>
+        </div>
+        <div class="col-md-6 w3agile_newsletter_right">
+            <form action="#" method="post">
+                <input type="email" name="Email" placeholder="Email" required="">
+                <input type="submit" value="" />
+            </form>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!-- //newsletter -->

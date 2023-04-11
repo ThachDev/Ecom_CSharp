@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = null;
+
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Log in Private</title>
+    <link rel="stylesheet" href="~/Content/login.css">
+
+
+     @*Google Font: Source Sans Pro 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+     Font Awesome 
+    <link href="~/Content/all.min.css" rel="stylesheet" />
+     icheck bootstrap 
+    <link href="~/Content/icheck-bootstrap.min.css" rel="stylesheet" />
+     Theme style 
+    <link href="~/Content/adminlte.min.css" rel="stylesheet" />*@
+</head>
+<body class="hold-transition login-page">
+    <!-- /.login-logo -->
+    <div class="box">
+        @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+        <div class="form">
+            <h2><b>Admin</b>LTE</h2>
+            <div class="inputBox">
+                @Html.TextBox("tk", "", new { @class = "form-control", @placeholder = "Email", @type = "text", @required = "required" })
+                <i></i>
+            </div>
+            <div class="inputBox">
+                @Html.Password("mk", "", new { @class = "form-control", @placeholder = "Password", @type = "password", @required = "required" })
+                <i></i>
+            </div>
+            <div class="links">
+                <a href="#">Forgot Password ?</a>
+                <a href="#">Signup</a>
+            </div>
+            <input type="submit" value="Login">
+        </div>
+         }     
+    </div>
+</body>
+</html>
+

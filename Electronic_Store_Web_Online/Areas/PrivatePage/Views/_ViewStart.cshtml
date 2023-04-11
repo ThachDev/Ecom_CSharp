@@ -1,0 +1,11 @@
+﻿<!--Tạo hàm ở đây thay vì ở Controller DashBorad bởi vì đặt ở đây thì tất cả các trang Private sẽ không bị đăng nhập dễ dàng bằng cách nhấp vào link-->
+@using Electronic_Store_Web_Online.Models
+
+@{
+    TaiKhoan x = (TaiKhoan)Session["ttDangNhap"];
+    if (x == null)
+    {
+        Response.Redirect("~/Login");
+    }
+    Layout = "~/Areas/PrivatePage/Views/Shared/_Layout.cshtml";
+} 

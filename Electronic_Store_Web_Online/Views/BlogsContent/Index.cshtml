@@ -1,0 +1,114 @@
+﻿@using Electronic_Store_Web_Online.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    BaiViet x = ViewData["BCX"] as BaiViet;
+}
+<!-- banner -->
+<div class="banner banner10">
+    <div class="container">
+        <h2 style=" color: #fff; font-size: 3em; text-align: center; padding: 1.5em 0 0;">Electronic Store</h2>
+    </div>
+</div>
+<!-- breadcrumbs -->
+<div class="breadcrumb_dress" style=" height: 50px;background: #c2c2c2;">
+    <div class="container" style=" margin-top: 8px;">
+        <ul>
+            <li><a href='@Url.Action("Index", "Index")'><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a> <i>/</i></li>
+            <li>Bài viết</li>
+        </ul>
+    </div>
+</div>
+
+<!-- mobiles -->
+<div class="mobiles">
+    <div class="container">
+        <div class="w3ls_mobiles_grids">
+            <div class="content">
+                <div class="blog">
+                    <h1 class="text-center">@x.tenBV</h1>
+                    <p class="blog" style="margin-top: 20px;"><!--Dữ liệu thô( kiểu văn bản )--> @Html.Raw(x.noiDung)</p>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!-- new-products -->
+<div class="w3l_related_products">
+    <div class="container">
+        <h3>Bài viết tương tự</h3>
+        <ul id="flexiselDemo2">
+            @{ //Khởi tạo biến e để tạo ra bài viết cần minh họa
+
+                foreach (BaiViet k in Common.getArticles(6))
+                {
+                    <li>
+                        <div class="w3l_related_products_grid">
+                                        <div class="agile_ecommerce_tab_left mobiles_grid">
+                                            <div>
+                                                <img style="height: 150px" src="@k.hinhDD" alt="@k.maBV " class="img-responsive" />
+                                            </div>
+                                            <div class="start-date" style="margin-top: 20px; margin-bottom:15px;">
+                                                <p style="font-size: 16px">@String.Format("{0: MMMM dd yyyy}", k.ngayDang) in <a href="#">@(k.loaiTin.Equals("TT")? "Tin tức" : "Quảng Cáo")</a> </p>
+                                            </div>
+                                            <h5><a href="@Url.Action("Index", "BlogsContent", new {maBv = k.maBV}) ">@k.tenBV</a></h5>
+                                            <div><a style="text-align:center" href="@Url.Action("Index","BlogsContent",new {maBv = k.maBV})">Tìm hiểu thêm -></a></div>
+                                        </div>
+                        </div>
+                    </li>
+
+                }
+            }
+
+
+        </ul>
+
+        <script type="text/javascript">
+            $(window).load(function () {
+                $("#flexiselDemo2").flexisel({
+                    visibleItems: 4,
+                    animationSpeed: 1000,
+                    autoPlay: true,
+                    autoPlaySpeed: 3000,
+                    pauseOnHover: true,
+                    enableResponsiveBreakpoints: true,
+                    responsiveBreakpoints: {
+                        portrait: {
+                            changePoint: 480,
+                            visibleItems: 1
+                        },
+                        landscape: {
+                            changePoint: 640,
+                            visibleItems: 2
+                        },
+                        tablet: {
+                            changePoint: 768,
+                            visibleItems: 3
+                        }
+                    }
+                });
+
+            });
+        </script>
+        <script type="text/javascript" src="~/Scripts/jquery.flexisel.js"></script>
+    </div>
+</div>
+<!-- //new-products -->
+<!-- newsletter -->
+<div class="newsletter">
+    <div class="container">
+        <div class="col-md-6 w3agile_newsletter_left">
+            <h3>Newsletter</h3>
+            <p>Excepteur sint occaecat cupidatat non proident, sunt.</p>
+        </div>
+        <div class="col-md-6 w3agile_newsletter_right">
+            <form action="#" method="post">
+                <input type="email" name="Email" placeholder="Email" required="">
+                <input type="submit" value="" />
+            </form>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<!-- //newsletter -->

@@ -1,0 +1,183 @@
+﻿@using System.Web.Optimization
+@using Electronic_Store_Web_Online.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electronic Store a Ecommerce Online Shopping Category Bootstrap Responsive Website Template | Home :: w3layouts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Electronic Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+	SmartPhone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+           function hideURLbar(){ window.scrollTo(0,1); } </script>
+    @Styles.Render("~/bundles/Css")
+    @Scripts.Render("~/bundles/JScripts")
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,200,600,800,700,500,300,100,900' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Arimo:400,700,700italic' rel='stylesheet' type='text/css'>
+    <link href="~/Content/component.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/main.css" rel="stylesheet" />
+    <!-- web fonts -->
+    <link href='//fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <!-- //web fonts -->
+    <!-- start-smooth-scrolling -->
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+            });
+        });
+    </script>
+    <!-- //end-smooth-scrolling -->
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/simpleCart.min.js"></script>
+    <!-- start menu -->
+    <link href="~/Content/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="~/Scripts/megamenu.js"></script>
+    <script>$(document).ready(function () { $(".megamenu").megamenu(); });</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <!-- start menu -->
+
+</head>
+<body    style="background: #f5f5f5;">
+    <!-- header -->
+    <div class="header" id="home1">
+        <div class="container">
+            <div class="w3l_login">
+                <a href='@Url.Action("Index", "Login")'><span class="fas fa-house-user" style="margin-top: 18px;" aria-hidden="true"></span></a>
+            </div>
+            <div class="w3l_logo">
+                <h1>@Html.ActionLink("Electronic Store", "Index", "Index")<a><span>Your stores. Your place.</span></a></h1>
+            </div>
+            <div class="search">
+                <input class="search_box" type="checkbox" id="search_box">
+                <label class="icon-search" for="search_box"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></label>
+                <div class="search_form">
+                    <form action="Index" method="post">
+                        <input type="text" name="Search" placeholder="Search...">
+                        <input type="submit" value="Send">
+                    </form>
+                </div>
+            </div>
+            <div class="cart cart box_1">
+                <div class="w3l_login">
+                    <a href='@Url.Action("Index", "CartShopping")' class="w3view-cart"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="margin-top: 7px"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //header -->
+    <!-- navigation -->
+    <div class="navigation" style="background: #313aaf; ">
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header nav_2">
+                    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+                    <ul class="nav navbar-nav" style=" text-align: center;">
+                        <!-- Mega Menu -->
+                        <li><a href='@Url.Action("Index", "Index")' class="act">Trang chủ</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sản phẩm <b class="caret"></b></a>
+                            @{
+                                Common x = (Common)HttpContext.Current.Application["dc"];
+                            }
+                            <ul class="dropdown-menu multi-column multi-column-dropdown">
+
+                                @foreach (LoaiSP i in x.NhomHang)
+                                {
+
+                                    <li style="width: 240px;"><a href="@Url.Action("Index","Products",new {ma=@i.maLoai})" style="color: #000 !important; font-size: 17px;"><b>@i.tenLoai</b></a></li>
+
+                                }
+                            </ul>
+
+                        </li>
+
+                        <li>@Html.ActionLink("Bài Viết", "Index", "Blogs")</li>
+                        <li>@Html.ActionLink("Hỗ trợ", "Index", "Faq")</li>
+                        <li>@Html.ActionLink("Về chúng tôi", "Index", "About")</li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- //navigation -->
+    <!--Phần nội dung-->
+    @RenderBody()
+    <!--Phần nội dung-->
+    @Scripts.Render("~/bundles/CartScripts")
+    <!-- footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="w3_footer_grids">
+                <div class="col-md-3 w3_footer_grid">
+                    <h3>Liên hệ</h3>
+                    <p>
+
+                        Electronic Store - ứng dụng mua sắm trực tuyến thú vị, tin cậy, an toàn và miễn phí!
+                        Bạn sẽ mua hàng trực tuyến an tâm và nhanh chóng hơn bao giờ hết!
+                    </p>
+                    <ul class="address">
+                        <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>30 Bo Bao Tan Thang, Tan Phu District, Thành phố Hồ Chí Minh.</li>
+                        <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:thienthach147@gmail.com">thienthach147@example.com</a></li>
+                        <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+(84) - 0364749854</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 w3_footer_grid">
+                    <h3>Thông tin</h3>
+                    <ul class="info">
+                        <li>@Html.ActionLink("Về chúng tôi", "Index", "About")</li>
+                        <li>@Html.ActionLink("Liên hệ", "Index", "Mail")</li>
+                        <li>@Html.ActionLink("Bài viết", "Index", "Blogs")</li>
+                        <li>@Html.ActionLink("Hỗ trợ", "Index", "Faq")</li>
+                       
+                    </ul>
+                </div>
+                <div class="col-md-3 w3_footer_grid">
+                    <h3>Các sản phẩm</h3>
+                    <ul class="info">
+                        @foreach (LoaiSP i in x.NhomHang)
+                        {
+
+                            <li><a href="@Url.Action("Index", "Products", new { ma = @i.maLoai })"><b>@i.tenLoai</b></a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-md-3 w3_footer_grid" style="margin-top: 90px;">
+                    <h4>Follow Us</h4>
+                    <div class="agileits_social_button">
+                        <ul>
+                            <li><a href="#" class="facebook"> </a></li>
+                            <li><a href="#" class="twitter"> </a></li>
+                            <li><a href="#" class="google"> </a></li>
+                            <li><a href="#" class="pinterest"> </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="footer-copy">
+            <div class="footer-copy1">
+                <div class="footer-copy-pos">
+                    <a href="#home1" class="scroll"><img src="~/images/arrow.png" alt=" " class="img-responsive" /></a>
+                </div>
+            </div>
+            <div class="container">
+                <p>&copy; 2023 Electronic Store. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- //footer -->    
+</body>
+</html>

@@ -1,0 +1,166 @@
+﻿@*//---Tương tác truyền dữ liệu giữa View và Controller*@
+@model Electronic_Store_Web_Online.Models.BaiViet
+@{
+    ViewBag.Title = "Index.html";
+}
+
+
+<!-- Content Header (Page header) -->
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Đăng bài giới thiệu sản phẩm - Quảng cáo</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","DashBoard")">Home</a></li>
+                        <li class="breadcrumb-item active">Đăng bài viết</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <div class="container-fluid">
+        @using (Html.BeginForm("Index", "IntroductPost", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-8">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin chính của sản phẩm</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form>
+                            <!--Tên bài viết-->
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Tên bài viết </label>
+                                    @Html.TextBoxFor(m => m.tenBV, new { @class = "form-control", @placeholder = "Nhập tên bài viết..." })
+                                </div>
+
+                                <!--Nội dung tóm tắt-->
+                                <div class="form-group">
+                                    <label>Nội dung tóm tắt</label>
+                                    @Html.TextAreaFor(m => m.ndTomTat, new { @class = "form-control", @placeholder = "Nhập nội dung tóm tắt..." })
+                                </div>
+                                <!--Ngày đăng bài viết-->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Ngày đăng </label>
+                                            @Html.TextBoxFor(m => m.ngayDang, new { @class = "form-control", @disabled = "disabled" })
+                                        </div>
+                                    </div>
+                                    <!--Tài khoản-->
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Tài khoản </label>
+                                            @Html.TextBoxFor(m => m.taiKhoan, new { @class = "form-control", @disabled = "disabled" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Kiểm duyệt bài viết -->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-check">
+                                            <div>
+                                                <label>Kiểm duyệt bài viết</label>
+                                            </div>
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                            <label class="form-check-label" for="exampleCheck1">Đã duyệt</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Số lần đọc </label>
+                                            @Html.TextBoxFor(m => m.soLanDoc, new { @class = "form-control", @placeholder = "Nhập số lần đọc..." })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- right column -->
+                <div class="col-md-4">
+                    <!-- general form elements disabled -->
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title">Hình đại diện</h3>
+                        </div>
+                        <div class="text-center">
+                            <img src="@ViewBag.ddHinh " class=" img-thumbnail" style="width: 88%; height: 282px;" />
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="exampleInputFile">File input</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="exampleInputFile" name="hinhDaiDien">
+                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <button class="input-group-text" disabled> Upload</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Nội dung bài viết</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <!--Chỉ giới hạng 4000 từ.-->
+                                @Html.TextAreaFor(m => m.noiDung, new
+                                {
+                                    @class = "textarea",
+                                    @id = "ndBaiViet",
+                                    @placeholder = "Nhập nội dung bài viết...",
+                                    @style = "width : 100%; height: 600px; font-size: 14px; " + "line-height:18px; border: 1px solid #dddddd; padding: 10px;"
+                                })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class=" col-md-12">
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script src="https://cdn.tiny.cloud/1/qqsbms5ckq96uipujnrcudp0fxdkrrf01atydxmos6ortpg4/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+
+    tinymce.init({
+        selector: 'textarea#ndBaiViet',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+    });
+</script>
+
+
+
+
+
+
+
+

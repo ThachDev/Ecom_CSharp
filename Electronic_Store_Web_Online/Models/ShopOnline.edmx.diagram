@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1ef42a109f9e4aed88ec70e1669a364e" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="ShopOnline_DataModel.BaiViet" Width="1.5" PointX="2.375" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopOnline_DataModel.CtDonHang" Width="1.5" PointX="4.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopOnline_DataModel.DonHang" Width="1.5" PointX="4.375" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopOnline_DataModel.KhachHang" Width="1.5" PointX="4.375" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopOnline_DataModel.LoaiSP" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopOnline_DataModel.SanPham" Width="1.5" PointX="2.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShopOnline_DataModel.TaiKhoan" Width="1.5" PointX="0.5" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="ShopOnline_DataModel.FK__BaiViet__taiKhoa__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopOnline_DataModel.FK__CtDonHang__maSP__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopOnline_DataModel.FK__CtDonHang__soDH__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopOnline_DataModel.FK__DonHang__maKH__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopOnline_DataModel.FK__DonHang__taiKhoa__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopOnline_DataModel.FK__SanPham__maLoai__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="ShopOnline_DataModel.FK__SanPham__taiKhoa__22AA2996" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

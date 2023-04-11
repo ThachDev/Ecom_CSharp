@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="breadcrumb_dress">
+    <div class="container">
+        <ul>
+            <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a> <i>/</i></li>
+            <li>Products</li>
+        </ul>
+    </div>
+</div>
+    <div class="content">
+        <div class="text-center">
+            <img src="~/images/tutorial-preview-large.jpg" style=" width: 180px; margin-top: 18px;"/>
+            <h2>Đăng ký mua hàng thành công !</h2>
+            <p style="margin-top: 12px;">Cảm ơn quý khách hàng đã gửi mua hàng tới Electronic</p>
+            <p style="margin-top: 12px;">Bộ phận phụ trách sẽ chủ động liên hệ cho anh (chị) trong thời gian sớm nhất có thể.</p>
+            <p style="margin-top: 12px;">Chân thành cảm ơn</p><br />
+            <button class="btn-success" style="width: 150px;height: 50px;"><a href="@Url.Action("Index", "Index")" style=" color: white;"> <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Về trang chủ </a></button>
+        </div>
+    </div>
+

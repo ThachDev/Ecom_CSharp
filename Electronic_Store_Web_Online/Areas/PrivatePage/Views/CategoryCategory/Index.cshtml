@@ -1,0 +1,149 @@
+﻿@using Electronic_Store_Web_Online.Models
+@model Electronic_Store_Web_Online.Models.LoaiSP
+@{
+    ViewBag.Title = "Index";
+    List<LoaiSP> list = ViewData["DanhSachLoai"] as List<LoaiSP>;
+}
+<style>
+    form{
+        display:inline;
+    }
+</style>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Chủng loại và ngành hàng</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="@Url.Action("Index","DashBoard")">Home</a></li>
+                        <li class="breadcrumb-item active">Loại hàng - Ngành Hàng</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-8">
+                    <!-- general form elements -->
+                    <div class="card card-secondary">
+                        <div class="card-header">
+                            <h3 class="card-title">Chủng loại hàng hóa - Ngành hàng</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Mã loại</th>
+                                        <th>Tên loại hàng</th>
+                                        <th>Số sản phẩm</th>
+                                        <th>Nhóm lệnh</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (LoaiSP i in list)
+                                    {
+                                        <tr>
+                                            <td>@i.maLoai</td>
+                                            <td>@i.tenLoai </td>
+                                            <td>@i.SanPhams.Where(x => x.maLoai == i.maLoai).Count() Sản phẩm</td>
+                                            <td class="text-center">
+                                                @using (Html.BeginForm("Delete", "CategoryCategory", FormMethod.Post))
+                                                {
+                                                    <input type="hidden" name="maLoai" value=" @i.maLoai" />
+                                                    <button class="btn-danger" title="Xóa loại hàng">
+                                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                                    </button>
+                                                }
+                                                @using (Html.BeginForm("Update", "CategoryCategory", FormMethod.Post))
+                                                {
+                                                    <input type="hidden" name="maLoaiChinhSua" value=" @i.maLoai" />
+                                                    <button class="btn-info" title="Chỉnh sửa loại hàng">
+                                                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                                                    </button>
+                                                }
+                                            </td>
+                                        </tr>
+
+                                    }
+
+
+
+                                </tbody>
+                            </table>
+                            <div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="example2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example2_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="example2_previous"><a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item next" id="example2_next"><a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <!-- right column -->
+                <div class="col-md-4" style="height">
+                    <!-- general form elements disabled -->
+                    @using(Html.BeginForm("Index","CategoryCategory",FormMethod.Post))
+                    {
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <h3 class="card-title">Thông tin chính của sản phẩm</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body" style="height: 525px;">
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Tên nhóm sản phẩm </label>
+                                    @Html.TextBoxFor(m => m.tenLoai, new { @class = "form-control", @placeholder = "Nhập tên loại hàng..." })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Chi tiết loại hàng</label>
+                                @Html.TextAreaFor(m => m.ghiChu, new { @class = "form-control", @placeholder = "Nhập nôi dung loại hàng..." })
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success" title="Lưu thông tin ">
+                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                    @Html.HiddenFor(x => x.maLoai)
+                    }
+                </div>
+                
+                <div class="col-md-12">
+                    <div class="card card-outline card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Summernote
+                            </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-footer">
+                            Visit <a href="https://github.com/summernote/summernote/">Summernote</a> documentation for more examples and information about the plugin.
+                        </div>
+                    </div>
+                </div>
+                <div class=" col-md-12">
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+
+                <!-- /.row -->
+            </div>
+        </div>
+                    <!-- /.container-fluid -->
+    </section>
+</div>    
+          
