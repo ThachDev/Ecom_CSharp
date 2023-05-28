@@ -65,7 +65,7 @@ namespace Electronic_Store_Web_Online.Areas.PrivatePage.Controllers
                 //---B3: Lưu thông tin vào DataBase
                 db.SaveChanges();
                 //----- Nếu thành công sẽ chuyển đến 
-                return RedirectToAction("Index", "ProductType", new { IsActive = 0 });
+                return RedirectToAction("Index","ProductType", new {IsActiveSP = 0});
 
             }
             catch
