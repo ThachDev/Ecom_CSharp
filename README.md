@@ -1,4 +1,4 @@
-# Ecom_CSharp  
+# Electronic_CSharp  
 **E-commerce Platform** được xây dựng bằng **C# / .NET MVC**  
 Một ứng dụng thương mại điện tử mẫu, hỗ trợ các tính năng cơ bản như quản lý sản phẩm, giỏ hàng, đơn hàng, người dùng, v.v.
 
